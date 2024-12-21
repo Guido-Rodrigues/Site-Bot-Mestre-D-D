@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+header .navbar {
+    position: relative !important;
+}
+    </style>
+</head>
+
+<body>
+
+    <div class="" id="backgroundcadastro">
+
+        <header>
+            <nav class="navbar navbar-expand-lg bg-body-tertiary ">
+                <div class="container-fluid ">
+                    <a class="navbar-brand center" href="/">
+                        <img src="img/dice-d20-solid2.svg" alt="Logo" width="80" height="64" class="center" id="logotipo">
+                        <p class="text-center" id="logotexto">Exemplo</p>
+                      </a>              
+                </div>
+              </nav>
+        </header>
+
+        <div id="signup-container">
+            <h2>Entrar</h2>
+                    <!-- captura a variavel 'erro' declarada no app.py em caso de erro -->
+                    {% if erro %}
+                    <div id="alerta" class="alerta" role="alert">
+                    {{ erro }}
+                    </div>
+                    {% endif %}
+                    <!-- captura a variavel 'sucesso1' declarada no app.py em caso de sucesso1 -->
+                    {% if sucesso1 %}
+                    <div id="sucesso1" class="sucesso1" role="alert">
+                    {{ sucesso1 }}
+                    </div>
+                    {% endif %}
+            <form action="{{ url_for('login') }}" method="POST">
+                <div class="mb-3">
+                    <label for="usuario" class="form-label">Nome de usuário ou e-mail</label>
+                    <input type="text" class="form-control" id="usuario" name="usuario" required>
+                </div>
+                <div class="mb-3">
+                    <label for="senha" class="form-label">Senha</label>
+                    <input type="password" class="form-control" id="senha" name="senha" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Entrar</button>
+            </form>
+            <div class="login-link">
+                <a href="{{ url_for('redefinir_senha') }}">Esqueci minha senha</a>
+            </div>
+            <div class="login-link">
+                Novo ao bot? <a href="{{ url_for('cadastro') }}">Crie sua conta</a>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <footer class="py-5 text-center">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi blandit varius magna et efficitur.</p>
+        <p class="mb-0">
+          <a href="#">Voltar ao topo</a>
+        </p>
+
+
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    </footer>
+</body>
+</html>

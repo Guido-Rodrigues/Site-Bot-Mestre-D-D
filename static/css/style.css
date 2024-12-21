@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 body{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+    font-family: 'Roboto', 'Gill Sans', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
 }
 
 header .navbar {
@@ -9,15 +11,28 @@ header .navbar {
     right: 0;
     z-index: 100;
     background-color: #582d3000 !important;
+       
 }
+
+.navbar .nav-item{
+    /* text-shadow: 0 4px 6px rgba(0, 0, 0, 0.726); */
+    text-shadow: 
+    0px 4px 6px rgba(0, 0, 0, 0.5), 
+   -0px 4px 6px rgba(0, 0, 0, 0.5), 
+    0px -4px 6px rgba(0, 0, 0, 0.5), 
+   -0px -4px 6px rgba(0, 0, 0, 0.5); /* Ajuste conforme o efeito desejado */
+}    
+
 
 .navbar-brand, .navbar-nav .nav-link {
     color: #F8D5B5 !important;
+    
 }
 
 .navbar-nav .nav-link:hover {
     color: #D32430 !important;
-    font-weight: bold;}
+    font-weight: bold;
+}
 
 
 .navbar-toggler {
@@ -32,15 +47,31 @@ header .navbar {
 .navbar-toggler:hover {
     background-color: #f8d6b550;
 }
+
+.navbarhome[aria-expanded="true"] {
+    backdrop-filter: blur(4px) brightness(0.5);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+  }
     
 #background1{
-    background-image: url('/Site-Bot-Mestre-D-D/img/background1.png');
+    background-image: url('../img/background1.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     height: 100vh; /* Garante que a altura da página cubra toda a tela */
-    padding-top: 20%;
+    padding-top: 50px;
     border-bottom: 4px solid #5c3c3e; /* Borda inferior*/
+}
+
+#backgroundcadastro{
+    background-image: url('../img/background1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh; /* Garante que a altura da página cubra toda a tela */
+    border-bottom: 4px solid #5c3c3e; /* Borda inferior*/
+    padding-top: 50px;
+
 }
 
 #textobg1box{
@@ -51,6 +82,11 @@ header .navbar {
     max-width: 600px;
     box-sizing: border-box;
 }
+
+.textobg1boxhome{
+    margin-top: 9.5rem;
+}
+
 
 #textobg1{
     color: #FFEFF4;
@@ -163,9 +199,134 @@ footer{
     }
 }
 
+.center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+#logotexto{
+    font-size:xx-large;
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.726);
+
+}
+
+#signup-container {
+    background-color: #582d30d5;
+    padding: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto; 
+}
+
+#signup-container h2 {
+    color: #FFEFF4;
+    margin-bottom: 30px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.form-label {
+    color: #F8D5B5;
+    font-weight: 500;
+}
+
+.form-control {
+    background-color: #FFEFF4;
+    border: 1px solid #5c3c3e;
+    margin-bottom: 15px;
+}
+
+.form-control:focus {
+    background-color: #FFEFF4;
+    border-color: #D32430;
+    box-shadow: 0 0 0 0.25rem rgba(211, 36, 48, 0.25);
+}
+
+.btn-primary {
+    background-color: #D32430;
+    border-color: #D32430;
+    width: 100%;
+    padding: 10px;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+.btn-primary:hover {
+    background-color: #F8D5B5;
+    border-color: #F8D5B5;
+    color: #582D30;
+}
+
+.form-text {
+    color: #F8D5B5;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+    color: #F8D5B5;
+}
+
+.login-link a {
+    color: #FFEFF4;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    color: #D32430;
+}
 
 
+.alerta {
+    position: fixed;
+    bottom: -100px; /* Começa fora da tela */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff4444;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    animation: floatUp 4s ease-in-out;
+    animation-fill-mode: forwards;
+}
 
+.sucesso1 {
+    position: fixed;
+    bottom: -100px; /* Começa fora da tela */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #235f1e;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    animation: floatUp 4s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes floatUp {
+    0% {
+        bottom: -100px;
+        opacity: 0;
+    }
+    20% {
+        bottom: 30px;
+        opacity: 1;
+    }
+    80% {
+        bottom: 30px;
+        opacity: 1;
+    }
+    100% {
+        bottom: -100px;
+        opacity: 0;
+    }
+}
 
 
 
@@ -201,5 +362,3 @@ footer{
     }
 
 }
-
-
