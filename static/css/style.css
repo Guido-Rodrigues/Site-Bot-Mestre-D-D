@@ -52,7 +52,7 @@ header .navbar {
     backdrop-filter: blur(4px) brightness(0.5);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
   }
-    
+  
 #background1{
     background-image: url('../img/background1.png');
     background-size: cover;
@@ -61,6 +61,7 @@ header .navbar {
     height: 100vh; /* Garante que a altura da página cubra toda a tela */
     padding-top: 50px;
     border-bottom: 4px solid #5c3c3e; /* Borda inferior*/
+    /* margin-bottom: 100px; */
 }
 
 #backgroundcadastro{
@@ -85,6 +86,73 @@ header .navbar {
 
 .textobg1boxhome{
     margin-top: 9.5rem;
+}
+
+
+#configbox1{
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #582d30d5;
+    padding: 20px;
+    max-width: 60%;
+    box-sizing: border-box;
+}
+
+.configcard{
+    padding: 20px;
+    width: 100%; /* Faz com que o card se ajuste ao container pai */
+    min-width: 300px; /* Define um tamanho mínimo */
+}
+
+.configform{
+    padding-top: 10%;
+}
+
+#configbox1inner{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 800px;
+    margin: auto;
+}
+
+#textoconfigbox1{
+    color: #F8D5B5;
+    margin-bottom: 10px;
+    font-weight: 700;
+    font-size: 42px;
+}
+
+#textoconfigbox1desc{
+    color: #F8D5B5;
+    margin-bottom: 10px;
+
+}
+
+.card{
+    background-color: #582d30;
+}
+
+.card-title{
+    color: #F8D5B5;
+}
+
+.fotoperfil {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    object-fit: cover;
+    margin-bottom: 20px;
+    
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 
@@ -193,10 +261,12 @@ header .navbar {
 }
 
 footer{
+    z-index: 9999;
+    bottom: 0px;
     background-color: #582D30;
     p{
         color: #FFEFF4;
-    }
+    };
 }
 
 .center{
@@ -361,4 +431,21 @@ footer{
         margin-right: auto;
     }
 
+}
+
+
+/* Responsividade configcard*/
+@media (max-width: 768px) {
+    .configcard {
+        padding: 15px; /* Reduz padding */
+        width: 95%; /* Ocupa quase toda a largura */
+    }
+}
+
+@media (max-width: 576px) {
+    .configcard {
+        padding: 10px;
+        width: 100%; /* Ocupa toda a largura */
+        min-width: unset; /* Remove tamanho mínimo */
+    }
 }

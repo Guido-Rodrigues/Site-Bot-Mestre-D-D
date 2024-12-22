@@ -119,6 +119,52 @@ def redefinir_senha():
         return render_template('redefinir_senha.html')
 
 
+@app.route('/configuracoes', methods=['GET', 'POST'])
+def configuracoes():
+    if 'usuario_logado' in session:
+        return render_template('configuracoes.html', usuario = session['usuario_logado'])
+    else:
+        return redirect(url_for('login'))
+
+
+
+@app.route('/alterar_nome', methods=['GET', 'POST'])
+def alterar_nome():
+    if request.method == 'POST':
+        senha = request.form.get('senha')
+        usuario = session['usuario_logado']
+        # Verifica as credenciais no banco de dados
+        cnx = mysql.connector.connect(**db_config)
+        cursor = cnx.cursor()
+        query = 'SELECT COUNT(*) FROM jogadores WHERE senha = %s and nome = %s'
+        cursor.execute(query, (senha, usuario))
+        result = cursor.fetchone()
+        cursor.close
+        cnx.close
+
+        if result and result[0] == 1:
+            #senha existente -> atualiza o banco de dados
+            novonome = request.form.get('usuario')
+
+            # UPDATE no banco
+            cnx = mysql.connector.connect(**db_config)
+            cursor = cnx.cursor()
+            query = "UPDATE jogadores SET nome = %s WHERE senha = %s"
+            cursor.execute(query, (novonome, senha))
+            cnx.commit()
+            cursor.close()
+            cnx.close()
+
+            # Após atualizar, redireciona para página de configuracao
+            return render_template('configuracoes.html', sucesso2='Nome de usuario alterado com sucesso')
+            
+        else:
+            #falha no check -> senha não existe, exibe erro e renderiza a pagina novamente
+            return render_template('configuracoes.html', erro2='senha incorreta')
+
+    else:
+        return render_template('configuracoes.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -34,11 +34,16 @@
                         <a class="nav-link" href="">Meus Personagens</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="">Configurações</a>
+                        <a class="nav-link" href="{{ url_for('configuracoes') }}">Configurações</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('logout') }}">Sair</a>
                       </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('configuracoes') }}">{{usuario}}</a>
+                        </li>
                     </ul>
                   </div>
                 </div>
