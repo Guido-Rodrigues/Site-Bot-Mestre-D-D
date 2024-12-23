@@ -10,7 +10,7 @@
 <body>
 
 
-    <div id="background1" class="">
+    <div id="background2" class="">
 
         <header>
             <nav class="navbar navbar-expand-lg bg-body-tertiary navbarhome">
@@ -56,7 +56,7 @@
                 <p id="textoconfigbox1">Configurações de Perfil</p>
                 <p id="textoconfigbox1desc">Personalize sua experiência como Mestre</p>
 
-                <div class="card mb-4 container-fluid configcard center">
+                <div class="card cardform mb-4 container-fluid configcard center">
                     <div class="card-header">
                         <h5 class="card-title mb-0">
                             <i class="fas fa-shield me-2"></i>
@@ -90,8 +90,31 @@
                         <button type="submit" class="btn btn-primary">Enviar</button>
                     </form>
 
+
+
+                    <!-- captura a variavel 'errofoto' declarada no app.py em caso de errofoto -->
+                    {% if errofoto %}
+                    <div id="alerta" class="alerta" role="alert">
+                    {{ errofoto }}
+                    </div>
+                    {% endif %}
+
+                    <!-- captura a variavel 'erroformato' declarada no app.py em caso de erroformato -->
+                    {% if erroformato %}
+                    <div id="alerta" class="alerta" role="alert">
+                    {{ erroformato }}
+                    </div>
+                    {% endif %}
+
+                    <!-- captura a variavel 'sucessofoto' declarada no app.py em caso de sucessofoto -->
+                    {% if sucessofoto %}
+                    <div id="sucesso1" class="sucesso1" role="alert">
+                    {{ sucessofoto }}
+                    </div>
+                    {% endif %}
+
                     <!-- Form para alterar imagem de perfil -->
-                    <form action="/upload" method="POST" enctype="multipart/form-data" class="configform">
+                    <form action="/uploadfoto" method="POST" enctype="multipart/form-data" class="configform">
                         <div class="mg-3">
                             <label for="fotoperfil" class="form-label">Escolha uma nova foto de perfil: </label>
                             <div class="profile-container">
@@ -100,6 +123,10 @@
                             </div>                                
                             <input type="file" class="form-control" id="fotoperfil" name="fotoperfil" accept="image/*" required> 
                             <input type="hidden" id="hidden-input" name="profile-picture-hidden">
+                        </div>
+                        <div class="mb-3">
+                          <label for="senha" class="form-label">Senha</label>
+                          <input type="password" class="form-control" id="senha" name="senha" required placeholder="Digite sua senha">
                         </div>
                         <button type="submit" class="btn btn-primary">Enviar</button>
                     </form>

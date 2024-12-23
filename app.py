@@ -1,10 +1,15 @@
 import mysql.connector
+import os
 from flask import Flask, render_template, request, redirect, url_for, session, send_from_directory
 
 app = Flask(__name__,     
             static_url_path='',    
             static_folder='static',    
             template_folder='templates')
+
+# UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static/uploads')
+UPLOAD_FOLDER = 'static/uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 app.secret_key = 'chave_flask_super_secreta' #necessario para usar session
 
@@ -162,6 +167,78 @@ def alterar_nome():
             #falha no check -> senha não existe, exibe erro e renderiza a pagina novamente
             return render_template('configuracoes.html', erro2='senha incorreta')
 
+    else:
+        return render_template('configuracoes.html')
+
+
+
+extensoes_permitidas = {'.jpg', '.jpeg', '.png', '.gif'}
+@app.route('/uploadfoto', methods=['GET','POST'])
+def upload():
+    if request.method == 'POST':
+        senha = request.form.get('senha')
+        usuario = session['usuario_logado']
+
+        cnx = mysql.connector.connect(**db_config)
+        cursor = cnx.cursor()
+
+        query = "SELECT COUNT(*) FROM jogadores WHERE nome = %s and senha = %s"
+        cursor.execute(query, (usuario, senha))
+        result = cursor.fetchone()
+
+        cursor.close
+        cnx.close
+        if result and result[0] == 1:
+            # fotoperfil = request.form.get('fotoperfil')
+            fotoperfil = request.files['fotoperfil']
+            if fotoperfil:
+                cnx = mysql.connector.connect(**db_config)
+                cursor = cnx.cursor()
+
+                #Consulta o banco para saber o caminho da foto atual
+                query = "SELECT caminhofoto FROM jogadores WHERE nome = %s AND senha = %s"
+                cursor.execute(query,(usuario,senha))
+                result=cursor.fetchone()
+                fotoantiga = result[0]
+                #Remove a foto atual do servidor se ela existir
+                if fotoantiga:
+                    caminho_abs_fotoantiga = os.path.join(app.root_path, fotoantiga)
+                    os.remove(caminho_abs_fotoantiga)
+
+                #Consulta o ID do jogador para montar o nome do arquivo a ser salvo
+                query = "SELECT jogador_id FROM jogadores WHERE nome = %s AND senha = %s"
+                cursor.execute(query,(usuario, senha))
+                result = cursor.fetchone()
+                id_usuario = result[0]
+
+                # Obter a extensão do arquivo
+                _, ext = os.path.splitext(fotoperfil.filename)
+                ext = ext.lower()  # Normaliza para minúsculas
+
+                # Validar a extensão
+                extensoes_permitidas = {'.jpg', '.jpeg', '.png', '.gif'}
+                if ext not in extensoes_permitidas:
+                    return render_template('configuracoes.html', erroformato="Formato de arquivo não suportado.")
+
+                #Salva a foto do usuario no servidor
+                nomefoto = f"{usuario}_{id_usuario}{ext}"
+                caminhoarquivo = os.path.join(app.config['UPLOAD_FOLDER'], nomefoto).replace("\\","/")
+                caminho_absoluto = os.path.join(app.root_path, caminhoarquivo)
+                fotoperfil.save(caminho_absoluto)
+
+                #Atualiza o banco de dados com o caminho da nova foto
+                query = "UPDATE jogadores SET caminhofoto = %s WHERE nome = %s and senha = %s"
+                cursor.execute(query,(caminhoarquivo, usuario, senha))
+                cnx.commit()
+                cursor.close()
+                cnx.close()
+
+                return render_template('configuracoes.html', sucessofoto='Foto alterada com sucesso')
+
+            else:
+                return render_template('configuracoes.html', errofoto='Nenhuma foto selecionada')
+        else:
+            return render_template('configuracoes.html', erro2='senha incorreta')
     else:
         return render_template('configuracoes.html')
 

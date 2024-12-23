@@ -53,7 +53,7 @@ header .navbar {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
   }
   
-#background1{
+#background1 {
     background-image: url('../img/background1.png');
     background-size: cover;
     background-position: center;
@@ -64,8 +64,51 @@ header .navbar {
     /* margin-bottom: 100px; */
 }
 
+#background2 {
+    background-image: url('../img/background11.jpeg');
+    background-size: cover;
+    background-position: center;
+    /* background-repeat: no-repeat; */
+    height: 100%; /* Garante que a altura da página cubra toda a tela */
+    padding-top: 50px;
+    border-bottom: 4px solid #5c3c3e; /* Borda inferior*/
+    /* margin-bottom: 100px; */
+}
+
+#background3 {
+    background-image: url('../img/background5.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh; /* Garante que a altura da página cubra toda a tela */
+    padding-top: 50px;
+    border-bottom: 4px solid #5c3c3e; /* Borda inferior*/
+    /* margin-bottom: 100px; */
+}
+
+
+/* 
+#background3video {
+    position: relative; 
+    height: 100%; 
+    overflow: hidden; 
+    border-bottom: 4px solid #5c3c3e;
+    padding-top: 50px;
+} */
+
+#background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Largura completa */
+    height: 100%; /* Altura completa */
+    object-fit: cover; /* Cobre a área inteira mantendo a proporção */
+    z-index: -1; /* Envia o vídeo para trás do conteúdo */
+}
+
+
 #backgroundcadastro{
-    background-image: url('../img/background1.png');
+    background-image: url('../img/background6.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -131,7 +174,7 @@ header .navbar {
 
 }
 
-.card{
+.cardform{
     background-color: #582d30;
 }
 
@@ -157,7 +200,7 @@ header .navbar {
 
 
 #textobg1{
-    color: #FFEFF4;
+    color: #F8D5B5;
     margin-bottom: 10px;
     font-weight: 700;
     font-size: 42px;
@@ -171,15 +214,18 @@ header .navbar {
 }
 
 #textobg1box a{
-    background-color: #FFEFF4;
+    background-color: #F8D5B5;
     display: flex;
     flex-direction: column;
     border-radius: 2px;
     border-color: #582d30d5;
+
 }
 
 #textobg1box a:hover{
-    background-color: #F8D5B5;
+    background-color: #582d30d5;
+    border-color: #F8D5B5;
+    color: #F8D5B5;
 }
 
 #quickinfo{
@@ -315,18 +361,31 @@ footer{
 }
 
 .btn-primary {
-    background-color: #D32430;
+    /* background-color: #D32430;
     border-color: #D32430;
     width: 100%;
     padding: 10px;
     font-weight: 500;
-    margin-top: 20px;
+    margin-top: 20px; */
+
+    background-color: #F8D5B5;
+    display: flex;
+    flex-direction: column;
+    border-radius: 2px;
+    border-color: #582d30d5;
+    width: 100%;
+    color: black;
+
 }
 
 .btn-primary:hover {
-    background-color: #F8D5B5;
+    /* background-color: #F8D5B5;
     border-color: #F8D5B5;
-    color: #582D30;
+    color: #582D30; */
+
+    background-color: #582d30d5;
+    border-color: #F8D5B5;
+    color: #F8D5B5;
 }
 
 .form-text {
