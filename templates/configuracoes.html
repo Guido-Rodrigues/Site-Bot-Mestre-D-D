@@ -45,7 +45,49 @@
                       {{ sucessofoto }}
                       </div>
                       {% endif %}
+  
+                      <!-- captura a variavel 'sucesso1' declarada no app.py em caso de sucesso1 -->
+                      {% if sucesso1 %}
+                      <div id="sucesso1" class="sucesso1" role="alert">
+                      {{ sucesso1 }}
+                      </div>
+                      {% endif %}
 
+                      <!-- captura a variavel 'erro_confirma_senha' declarada no app.py em caso de erro_confirma_senha -->
+                      {% if erro_confirma_senha %}
+                      <div id="alerta" class="alerta" role="alert">
+                      {{ erro_confirma_senha }}
+                      </div>
+                      {% endif %}                      
+
+                      <!-- captura a variavel 'erro_senha_antiga' declarada no app.py em caso de erro_senha_antiga -->
+                      {% if erro_senha_antiga %}
+                      <div id="alerta" class="alerta" role="alert">
+                      {{ erro_senha_antiga }}
+                      </div>
+                      {% endif %}          
+                      
+                      
+                      <!-- captura a variavel 'sucesso_email' declarada no app.py em caso de sucesso1 -->
+                      {% if sucesso_email %}
+                      <div id="sucesso1" class="sucesso1" role="alert">
+                      {{ sucesso_email }}
+                      </div>
+                      {% endif %}
+
+                      <!-- captura a variavel 'erro_confirma_email' declarada no app.py em caso de erro_confirma_email -->
+                      {% if erro_confirma_email %}
+                      <div id="alerta" class="alerta" role="alert">
+                      {{ erro_confirma_email }}
+                      </div>
+                      {% endif %}                      
+
+                      <!-- captura a variavel 'erro_email_antigo' declarada no app.py em caso de erro_email_antigo -->
+                      {% if erro_email_antigo %}
+                      <div id="alerta" class="alerta" role="alert">
+                      {{ erro_email_antigo }}
+                      </div>
+                      {% endif %}                       
 
 
     <div id="background2" class="">
@@ -166,14 +208,117 @@
                     </form>
                 </div>
 
-            </div>
+                <div class="card cardform mb-4 container-fluid configcard center">
+                  <div class="card-header">
+                      <h5 class="card-title mb-0">
+                          <i class="fas fa-shield me-2"></i>
+                          Opções de conta
+                      </h5>
+                  </div>
 
+
+
+                  <!-- Form para alterar senha de usuario -->
+                  <form action="{{ url_for('alterar_senha') }}" method="POST" class="configform">
+                      <div class="mb-3">
+                          <label for="senha" class="form-label">Alterar senha:</label>
+                          <input type="password" class="form-control" id="senha" name="senha" required placeholder="Digite sua nova senha">
+                      </div>
+                      <div class="mb-3">
+                        <label for="confirma_senha" class="form-label">Confirmar senha:</label>
+                        <input type="password" class="form-control" id="confirma_senha" name="confirma_senha" required placeholder="Confirme sua nova senha">
+                    </div>
+                      <div class="mb-3">
+                          <label for="senha_antiga" class="form-label">Senha antiga:</label>
+                          <input type="password" class="form-control" id="senha_antiga" name="senha_antiga" required placeholder="Digite sua senha atual">
+                      </div>
+                      <button type="submit" class="btn btn-primary">Enviar</button>
+                  </form>
+
+
+
+
+
+                  <!-- Form para alterar email de usuario -->
+                  <form action="{{ url_for('alterar_email') }}" method="POST" class="configform">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Alterar e-mail:</label>
+                        <input type="text" class="form-control" id="email" name="email" required placeholder="Digite seu novo e-mail">
+                    </div>
+                    <div class="mb-3">
+                      <label for="confirma_email" class="form-label">Confirmar e-mail:</label>
+                      <input type="text" class="form-control" id="confirma_email" name="confirma_email" required placeholder="Confirme seu novo e-mail">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email_antigo" class="form-label">E-mail antigo:</label>
+                        <input type="text" class="form-control" id="email_antigo" name="email_antigo" required placeholder="Digite seu e-mail atual">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                  </form>
+
+                </div>
+
+                <div class="card cardform mb-4 container-fluid configcard center" style="border-color: #dc3545;">
+
+                  <div class="card-header">
+                      <h5 class="card-title mb-0">
+                          <i class="fas fa-shield me-2"></i>
+                          Danger Zone
+                      </h5>
+                  </div>
+
+                  <div class="card-body">
+
+                      <div class="">
+                          <svg class="delete-icon text-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                          </svg>
+                          
+                      </div>
+
+                      <h5 class="card-title">
+                        <i class="fas fa-shield me-2"></i>
+                        Excluir Conta
+                      </h5>
+
+                      <p class="card-text mb-4" style="color: #dc3545;">
+                          Ao excluir sua conta, todos os seus dados serão permanentemente removidos.
+                          Esta ação não pode ser desfeita.
+                      </p>
+
+                      <!-- Form para Excluir a conta -->
+                        <button class="btn w-100 btn-primary" style="background-color: #dc3545;" onclick="showConfirmDialog()" > 
+                          Excluir minha conta
+                        </button>       
+                        
+                  </div>
+                </div>
+          </div>
+            </div>
         </div>
     </div>
 
+    <div class="confirm-dialog" id="confirmDialog">
+      <div class="dialog-content float-up">
+          <h5 class="mb-3" style="color: white;">Você tem certeza?</h5>
+          <p class="card-text mb-4" style="color: white;">
+              Esta ação não pode ser desfeita. Isso excluirá permanentemente sua conta
+              e removerá seus dados de nossos servidores.
+          </p>
+          <div class="d-flex justify-items-center gap-2">
+              <button class="btn btn-primary" onclick="hideConfirmDialog()">
+                  Cancelar
+              </button>
 
+              <form action="/excluir_conta" method="POST" enctype="multipart/form-data">
+                <button class="btn btn-primary" type="submit" style="background-color: #dc3545; white-space: nowrap;">
+                    Sim, excluir minha conta
+                </button>
+              </form>
 
-
+          </div>
+      </div>
+    </div>
 
 
 
@@ -225,6 +370,24 @@
               }
             });
           </script>
+
+
+        <!-- Script para alertar o usuario na hora de excluir a conta -->
+        <script>
+          function showConfirmDialog() {
+              document.getElementById('confirmDialog').classList.add('show');
+          }
+
+          function hideConfirmDialog() {
+              document.getElementById('confirmDialog').classList.remove('show');
+          }
+
+          // function deleteAccount() {
+          //     // Aqui você implementa a lógica de exclusão da conta
+          //     alert('Conta deletada com sucesso!');
+          //     hideConfirmDialog();
+          // }
+        </script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </footer>

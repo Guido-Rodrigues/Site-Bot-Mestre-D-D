@@ -162,6 +162,112 @@ def redefinir_senha():
 
     else:
         return render_template('redefinir_senha.html')
+    
+@app.route('/alterar_senha', methods=['GET', 'POST'])
+def alterar_senha():
+    if request.method == 'POST':
+        id = session['id_logado']
+        usuario = session['usuario_logado'].upper()
+
+        cnx = mysql.connector.connect(**db_config)
+        cursor = cnx.cursor()
+
+        query = 'SELECT caminhofoto FROM jogadores WHERE jogador_id = %s'
+        cursor.execute(query, [id])
+        result = cursor.fetchone()
+        urlfotoperfil = None
+        if result and result[0]:
+            fotoperfil = result[0]
+            urlfotoperfil = url_for('static', filename=fotoperfil.replace('static/', ''))
+
+        senha_antiga = request.form.get('senha_antiga')
+        # Verifica as credenciais no banco de dados
+
+        query = 'SELECT COUNT(*) FROM jogadores WHERE senha = %s and jogador_id = %s'
+        cursor.execute(query, (senha_antiga, id))
+        result = cursor.fetchone()
+        cursor.close()
+        cnx.close()
+
+        nova_senha = request.form.get('senha')
+        confirma_senha = request.form.get('confirma_senha')
+
+        if nova_senha != confirma_senha:
+            return render_template('configuracoes.html', erro_confirma_senha='As senhas não coincidem!', fotoperfil = urlfotoperfil, usuario = usuario)
+
+
+        if result and result[0] == 1:
+            #usuario existente -> atualiza o banco de dados
+            # UPDATE no banco
+            cnx = mysql.connector.connect(**db_config)
+            cursor = cnx.cursor()
+            query = "UPDATE jogadores SET senha = %s WHERE jogador_id = %s"
+            cursor.execute(query, (nova_senha, id))
+            cnx.commit()
+            cursor.close()
+            cnx.close()
+
+            # Após atualizar, redireciona para página de login
+            return render_template('configuracoes.html', sucesso1='Senha alterada com sucesso', fotoperfil = urlfotoperfil, usuario = usuario)
+            
+        else:
+            #falha no check -> usuario não encontrado, senha incorreta
+            return render_template('configuracoes.html', erro_senha_antiga='Senha incorreta', fotoperfil = urlfotoperfil, usuario = usuario)
+
+    else:
+        return render_template('configuracoes.html.html')
+
+
+@app.route('/alterar_email', methods=['GET', 'POST'])
+def alterar_email():
+    if request.method == 'POST':
+        id = session['id_logado']
+        usuario = session['usuario_logado'].upper()
+
+        cnx = mysql.connector.connect(**db_config)
+        cursor = cnx.cursor()
+
+        query = 'SELECT caminhofoto FROM jogadores WHERE jogador_id = %s'
+        cursor.execute(query, [id])
+        result = cursor.fetchone()
+        urlfotoperfil = None
+        if result and result[0]:
+            fotoperfil = result[0]
+            urlfotoperfil = url_for('static', filename=fotoperfil.replace('static/', ''))
+
+        email_antigo = request.form.get('email_antigo')
+        # Verifica as credenciais no banco de dados
+
+        query = 'SELECT COUNT(*) FROM jogadores WHERE email = %s and jogador_id = %s'
+        cursor.execute(query, (email_antigo, id))
+        result = cursor.fetchone()
+        cursor.close()
+        cnx.close()
+
+        novo_email = request.form.get('email')
+        confirma_email = request.form.get('confirma_email')
+
+        if novo_email != confirma_email:
+            return render_template('configuracoes.html', erro_confirma_email='Os e-mails não coincidem!', fotoperfil = urlfotoperfil, usuario = usuario)
+
+        if result and result[0] == 1:
+            #usuario existente -> atualiza o banco de dados
+            # UPDATE no banco
+            cnx = mysql.connector.connect(**db_config)
+            cursor = cnx.cursor()
+            query = "UPDATE jogadores SET email = %s WHERE jogador_id = %s"
+            cursor.execute(query, (novo_email, id))
+            cnx.commit()
+            cursor.close()
+            cnx.close()
+
+            # Após atualizar, redireciona para página de login
+            return render_template('configuracoes.html', sucesso_email='E-mail alterado com sucesso', fotoperfil = urlfotoperfil, usuario = usuario)            
+
+        else:
+            #falha no check -> usuario não encontrado, email incorreta
+            return render_template('configuracoes.html', erro_email_antigo='E-mail incorreto', fotoperfil = urlfotoperfil, usuario = usuario)            
+
 
 
 @app.route('/configuracoes', methods=['GET', 'POST'])
@@ -245,23 +351,27 @@ def alterar_nome():
 
 @app.route('/uploadfoto', methods=['GET','POST'])
 def upload():
+    id = session['id_logado']
+    usuario = session['usuario_logado']
+
+    cnx = mysql.connector.connect(**db_config)
+    cursor = cnx.cursor()
+
+    query = "SELECT caminhofoto FROM jogadores WHERE nome = %s and jogador_id = %s"
+    cursor.execute(query, (usuario, id))
+    result = cursor.fetchone()
+    fotoatual = None
+    if result and result[0]:
+        fotoatual = result[0]
+        urlfotoatual = url_for('static', filename=fotoatual.replace('static/', ''))
+
+    cursor.close()
+    cnx.close()
+
     if request.method == 'POST':
-        id = session['id_logado']
-        usuario = session['usuario_logado']
 
-        cnx = mysql.connector.connect(**db_config)
-        cursor = cnx.cursor()
 
-        query = "SELECT caminhofoto FROM jogadores WHERE nome = %s and jogador_id = %s"
-        cursor.execute(query, (usuario, id))
-        result = cursor.fetchone()
-        fotoatual = None
-        if result and result[0]:
-            fotoatual = result[0]
-            urlfotoatual = url_for('static', filename=fotoatual.replace('static/', ''))
 
-        cursor.close()
-        cnx.close()
 
         fotoperfil = request.files['fotoperfil']
 
@@ -305,7 +415,36 @@ def upload():
             return render_template('configuracoes.html', errofoto='Nenhuma foto selecionada', usuario = usuario, fotoperfil = urlfotoatual)
 
     else:
+        return render_template('configuracoes.html', usuario = usuario.upper(), fotoperfil = urlfotoatual)
+
+@app.route('/excluir_conta',  methods=['GET','POST'])
+def excluir_Conta():
+    if request.method == 'POST':
+        id = session['id_logado']
+        usuario = session['usuario_logado']
+
+        cnx = mysql.connector.connect(**db_config)
+        cursor = cnx.cursor()
+
+        query = "SELECT caminhofoto FROM jogadores WHERE jogador_id = %s and nome = %s"
+        cursor.execute(query, (id, usuario))
+        result = cursor.fetchone()
+        if result and result[0]:
+            fotoperfil = result[0]
+            caminho_abs_fotoantiga = os.path.join(app.root_path, fotoperfil).replace("\\","/")
+            os.remove(caminho_abs_fotoantiga)            
+
+        query = "DELETE FROM jogadores WHERE jogador_id = %s and nome = %s"
+        cursor.execute(query, (id, usuario))
+        cnx.commit()
+        cursor.close()
+        cnx.close()
+        return render_template('index.html', sucesso_excluir_conta=f'Conta de nome {usuario.upper()} foi excluida com sucesso.')
+    else:
         return render_template('configuracoes.html')
+
+
+
 
 
 if __name__ == '__main__':

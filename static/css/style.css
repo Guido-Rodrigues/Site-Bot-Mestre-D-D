@@ -526,6 +526,54 @@ footer{
     animation-fill-mode: forwards;
 }
 
+.confirm-dialog {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+
+}
+
+.confirm-dialog.show {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.dialog-content {
+    background: #472528;
+    padding: 2rem;
+    border-radius: 5px;
+    max-width: 400px;
+    width: 90%;
+}
+
+.float-up {
+    animation: float-up 0.3s ease-out forwards;
+}
+
+@keyframes float-up {
+    0% {
+      transform: translateY(100px);
+      opacity: 0;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+
+
+
 @keyframes floatUp {
     0% {
         bottom: -100px;

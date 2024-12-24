@@ -15,6 +15,20 @@ header .navbar {
 
 <body>
 
+                    <!-- captura a variavel 'erro' declarada no app.py em caso de erro -->
+                    {% if erro %}
+                    <div id="alerta" class="alerta" role="alert">
+                    {{ erro }}
+                    </div>
+                    {% endif %}
+                    <!-- captura a variavel 'sucesso1' declarada no app.py em caso de sucesso1 -->
+                    {% if sucesso1 %}
+                    <div id="sucesso1" class="sucesso1" role="alert">
+                    {{ sucesso1 }}
+                    </div>
+                    {% endif %}
+
+
     <div class="" id="backgroundcadastro">
 
         <header>
@@ -30,18 +44,7 @@ header .navbar {
 
         <div id="signup-container">
             <h2 id="textobg1">Entrar</h2>
-                    <!-- captura a variavel 'erro' declarada no app.py em caso de erro -->
-                    {% if erro %}
-                    <div id="alerta" class="alerta" role="alert">
-                    {{ erro }}
-                    </div>
-                    {% endif %}
-                    <!-- captura a variavel 'sucesso1' declarada no app.py em caso de sucesso1 -->
-                    {% if sucesso1 %}
-                    <div id="sucesso1" class="sucesso1" role="alert">
-                    {{ sucesso1 }}
-                    </div>
-                    {% endif %}
+
             <form action="{{ url_for('login') }}" method="POST">
                 <div class="mb-3">
                     <label for="email" class="form-label">E-mail</label>

@@ -33,6 +33,13 @@
         </div>
         {% endif %}
 
+        <!-- captura a variavel 'sucesso_excluir_conta' declarada no app.py em caso de sucesso_excluir_conta -->
+        {% if sucesso_excluir_conta %}
+        <div id="sucesso1" class="sucesso1" role="alert">
+        {{ sucesso_excluir_conta }}
+        </div>
+        {% endif %}
+
 
       <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary ">
