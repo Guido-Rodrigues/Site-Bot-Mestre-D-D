@@ -15,33 +15,59 @@
         <header>
             <nav class="navbar navbar-expand-lg bg-body-tertiary navbarhome">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="/home">
-                        <img src="img/dice-d20-solid2.svg" alt="Logo" width="40" height="32">
+                    <a class="navbar-brand nav-link" aria-current="page" href="/home" style="display: flex; align-items: center;">
+
+                        <div class="logo-container">
+                            <img src="img/dice-d20-solid2.svg" alt="Logo" width="40" height="32" class="logo normal">
+                            <img src="img/dice-d20-solid3.svg" alt="Logo" width="40" height="32" class="logo hover">
+                            
+                        </div>
                         Exemplo
-                      </a>              
+                    </a>              
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                       <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="">Iniciar Campanha</a>
+                        <a class="nav-link" href="">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="60" height="20" fill="currentColor" class="bi bi-chevron-right chevron" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                          </svg>
+                          Iniciar Campanha
+                        </a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="">Minhas Aventuras</a>
+                        <a class="nav-link" href="">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="60" height="20" fill="currentColor" class="bi bi-chevron-right chevron" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                          </svg>Minhas Aventuras</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="">Meus Personagens</a>
+                        <a class="nav-link" href="">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="60" height="20" fill="currentColor" class="bi bi-chevron-right chevron" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                          </svg>Meus Personagens</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('configuracoes') }}">Configurações</a>
+                        <a class="nav-link active"  href="{{ url_for('configuracoes') }}">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="60" height="20" fill="currentColor" class="bi bi-chevron-right chevron" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                          </svg>Configurações</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('logout') }}">Sair</a>
+                        <a class="nav-link" href="{{ url_for('logout') }}">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="60" height="20" fill="currentColor" class="bi bi-chevron-right chevron" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                          </svg>Sair</a>
                       </li>
                     </ul>
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
+                    <!-- Display de nome e foto de usuario -->
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item" style="display: flex; align-items: center;">
+                            <a href="{{ url_for('configuracoes') }}">
+                                <img id="fotoperfilatual" class="fotoperfilmini" src="{{ fotoperfil if fotoperfil else 'https://ui-avatars.com/api/?name=' + usuario }}" alt="Foto de perfil atual" >
+                            </a> 
                             <a class="nav-link" href="{{ url_for('configuracoes') }}">{{usuario}}</a>
                         </li>
                     </ul>

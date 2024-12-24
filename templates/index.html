@@ -26,6 +26,14 @@
       </div> -->
 
 
+        <!-- captura a variavel 'sucessocadastro' declarada no app.py em caso de sucessocadastro -->
+        {% if sucessocadastro %}
+        <div id="sucesso1" class="sucesso1" role="alert">
+        {{ sucessocadastro }}
+        </div>
+        {% endif %}
+
+
       <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary ">
             <div class="container-fluid ">

@@ -29,7 +29,7 @@ header .navbar {
         </header>
 
         <div id="signup-container">
-            <h2>Entrar</h2>
+            <h2 id="textobg1">Entrar</h2>
                     <!-- captura a variavel 'erro' declarada no app.py em caso de erro -->
                     {% if erro %}
                     <div id="alerta" class="alerta" role="alert">
@@ -44,12 +44,12 @@ header .navbar {
                     {% endif %}
             <form action="{{ url_for('login') }}" method="POST">
                 <div class="mb-3">
-                    <label for="usuario" class="form-label">Nome de usuário ou e-mail</label>
-                    <input type="text" class="form-control" id="usuario" name="usuario" required>
+                    <label for="email" class="form-label">E-mail</label>
+                    <input type="text" class="form-control" id="email" name="email" required placeholder="Insira o seu e-mail de usuario">
                 </div>
                 <div class="mb-3">
                     <label for="senha" class="form-label">Senha</label>
-                    <input type="password" class="form-control" id="senha" name="senha" required>
+                    <input type="password" class="form-control" id="senha" name="senha" required placeholder="Insira sua senha">
                 </div>
                 <button type="submit" class="btn btn-primary">Entrar</button>
             </form>

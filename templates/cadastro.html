@@ -28,7 +28,24 @@ header .navbar {
               </nav>
         </header>
         <div id="signup-container">
-            <h2>Criar Conta</h2>
+            <h2 id="textobg1">Criar Conta</h2>
+
+                    <!-- captura a variavel 'errocadastro' declarada no app.py em caso de errocadastro -->
+                    {% if errocadastro %}
+                    <div id="alerta" class="alerta" role="alert">
+                    {{ errocadastro }}
+                    </div>
+                    {% endif %}
+
+                    <!-- captura a variavel 'erro_email_usado' declarada no app.py em caso de erro_email_usado -->
+                    {% if erro_email_usado %}
+                    <div id="alerta" class="alerta login-link" role="alert">
+                    {{ erro_email_usado }}, <a href="/login">faça login</a>
+                    </div>
+                    {% endif %}
+
+
+
             <form action="{{ url_for('cadastro') }}" method="POST">
                 <div class="mb-3">
                     <label for="usuario" class="form-label">Nome de usuário</label>
@@ -40,14 +57,14 @@ header .navbar {
                 </div>
                 <div class="mb-3">
                     <label for="senha" class="form-label">Senha</label>
-                    <input type="password" class="form-control" id="senha" name="senha" required>
+                    <input type="password" class="form-control" id="senha" name="senha" minlength="8" required>
                     <div class="form-text">A senha deve ter pelo menos 8 caracteres.</div>
                 </div>
                 <div class="mb-3">
                     <label for="confirma_senha" class="form-label">Confirmar Senha</label>
                     <input type="password" class="form-control" id="confirma_senha" name="confirma_senha" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Criar Conta</button>
+                <button type="submit" class="btn btn-primary" ar>Criar Conta</button>
             </form>
             <div class="login-link">
                 Já tem uma conta? <a href="{{ url_for('login') }}">Fazer login</a>
