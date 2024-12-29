@@ -1,6 +1,8 @@
 import mysql.connector
 import os
 from flask import Flask, render_template, request, redirect, url_for, session, send_from_directory, flash
+from services.JogadorService import JogadorService
+from services.CampanhaService import CampanhaService
 
 app = Flask(__name__,     
             static_url_path='',    
@@ -21,6 +23,8 @@ db_config = {
     'database': 'maindb'
 }
 
+jogadorService = JogadorService(db_config)
+campanhaService = CampanhaService(db_config)
 
 @app.route('/')
 def index():
@@ -443,9 +447,23 @@ def excluir_Conta():
     else:
         return render_template('configuracoes.html')
 
+@app.route('/meus_personagens', methods=["GET"])
+def meus_personagens():
+    if not 'usuario_logado' in session:
+        return redirect(url_for('login'))
+    
+    id = session['id_logado']
+    usuario = session['usuario_logado'].upper()
+    
+    jogador = jogadorService.get_by_id(id)
+    urlfotoperfil = url_for('static', filename=jogador["caminhofoto"].replace('static/', '')) if jogador else None
 
-
-
+    personagens = jogadorService.get_personagens_by_id_jogador(id)
+    for personagem in personagens:
+        personagem["campanha"] = campanhaService.get_by_id(personagem["campanha_id"])
+    print(personagens)
+    return render_template('meus_personagens.html', personagens=personagens, usuario=usuario, fotoperfil=urlfotoperfil)
+    
 
 if __name__ == '__main__':
     app.run(debug=True)

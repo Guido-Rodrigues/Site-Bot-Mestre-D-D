@@ -1,21 +1,20 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Meus Personagens</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/meus_personagens.css')}}">
 </head>
 <body>
-
-
-    <div id="background1" class="">
+    <div id="background2" class="">
 
         <header>
             <nav class="navbar navbar-expand-lg bg-body-tertiary navbarhome">
                 <div class="container-fluid">
-                    <a class="navbar-brand nav-link" aria-current="page" href="/home" style="display: flex; align-items: center;">
+                    <a class="navbar-brand nav-link" href="/home" style="display: flex; align-items: center;">
 
                         <div class="logo-container">
                             <img src="img/dice-d20-solid2.svg" alt="Logo" width="40" height="32" class="logo normal">
@@ -44,13 +43,13 @@
                           </svg>Minhas Aventuras</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('meus_personagens') }}">
+                        <a class="nav-link" href="">
                           <svg xmlns="http://www.w3.org/2000/svg" width="60" height="20" fill="currentColor" class="bi bi-chevron-right chevron" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
                           </svg>Meus Personagens</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link active"  href="{{ url_for('configuracoes') }}">
+                        <a class="nav-link active" aria-current="page" href="{{ url_for('configuracoes') }}">
                           <svg xmlns="http://www.w3.org/2000/svg" width="60" height="20" fill="currentColor" class="bi bi-chevron-right chevron" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
                           </svg>Configurações</a>
@@ -65,10 +64,10 @@
                     <!-- Display de nome e foto de usuario -->
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item" style="display: flex; align-items: center;">
-                            <a href="{{ url_for('configuracoes') }}">
-                                <img id="fotoperfilatual" class="fotoperfilmini" src="{{ fotoperfil if fotoperfil else 'https://ui-avatars.com/api/?name=' + usuario }}" alt="Foto de perfil atual" >
-                            </a> 
-                            <a class="nav-link" href="{{ url_for('configuracoes') }}">{{usuario}}</a>
+                          <a href="{{ url_for('configuracoes') }}">
+                            <img id="fotoperfilmini" class="fotoperfilmini" src="{{ fotoperfil if fotoperfil else 'https://ui-avatars.com/api/?name=' + usuario }}" alt="Foto de perfil atual" >
+                          </a>                  
+                          <a class="nav-link" href="{{ url_for('configuracoes') }}">{{usuario}}</a>
                         </li>
                     </ul>
                   </div>
@@ -77,110 +76,83 @@
         </header>
 
 
-        <div id="textobg1box" class="center textobg1boxhome">
-            <p id="textobg1">Bem-vindo, {{usuario}}!</p>
-            <p id="textobg1desc">Explore novas aventuras ou retorne à sua campanha agora mesmo.</p>
-            <div id="buttons">
-                <a href="" class="btn">Iniciar Campanha</a>
-                <a href="" class="btn">Minhas Aventuras</a>
-            </div>
-        </div>
-    </div>
-
-
-    <div id="quickinfo">
-        <h3 id="qititle" class="text-center">Informações Rápidas</h3>
-
-        <div id="cardCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="card">
-                        <h3>Resumo da Campanha Atual</h3>
-                        <p>Se o usuário já estiver participando de uma campanha, aqui será mostrado um resumo rápido com o nome da campanha, progresso, últimas ações, data da proxima sessão, data da última sessão.</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="card">
-                        <h3>Status de Personagem</h3>
-                        <p>Aqui será exibido uma visão geral rápida do personagem atual, como nome, nível, classe, pontos de vida, e outras estatísticas</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="card">
-                        <h3>Exploração</h3>
-                        <p>Aqui serão exibidas localizações exploradas até o momento, itens interessantes encontrados, etc.</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="card">
-                        <h3>Relatórios de Combate</h3>
-                        <p>Aqui serão exibidos relatórios de Combate como numero de inimigos derrotados, total de dano causado, etc.</p>
-                    </div>
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#cardCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Anterior</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#cardCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Próxima</span>
-            </button>
-        </div>
-    </div>
-
-    <div id="chat">
-        <h3 id="chatTitle" class="text-center">Chat de Aventura</h3>
-        <div id="chatContainerOuter" class="container mt-5">
-            <div class="chat-container">
-                <div id="mensagemContainer" class="mensagemContainer">
-                    <div class="mensagem mensagem-sistema p-2 mb-3">
-                        Bem vindo {{usuario}}! Use este espaço para interagir com o bot, aqui você pode consultar regras, pedir dicas, curiosidades e mais!
-                    </div>
-                </div>
+        <div id="container" class="center textobg1boxhome">
+            <div id="container-inner">
+                <p id="textoconfigbox1">Meus Personagens</p>
+                <p id="textoconfigbox1desc">Gerencie os seus personagens</p>
                 
-                <div class="chat-input">
-                    <div class="input-group">
-                        <button id="rollDiceBtn" class="btn btn-danger me-2" type="button">
-                            <i class="bi bi-dice-6"></i> Rolar dado
-                        </button>
-                        <input type="text" id="mensagemInput" class="form-control" placeholder="Insira sua mensagem ou pergunta...">
-                        <button id="sendMessageBtn" class="btn btn-success ms-2" type="button">
-                            <i class="bi bi-send"></i> Enviar
-                        </button>
+                {% if not personagens %}
+                    <div class="empty-personagem-list">
+                        <h4>Você ainda não tem nenhum personagem</h4>
+                        <h1>😿</h1>
                     </div>
-                </div>
+                {% else %}
+                    <div class="card-list-container">
+                        {% for personagem in personagens %}
+                        <div class="card mb-4 container-fluid personagem">
+                            <div class="nome">{{ personagem["nome"] }} - Nível {{ personagem["nivel"] }}</div>
+                            <div class="campanha">{{ personagem["campanha"]["nome"] }}</div>
+                            <div class="stat-section">
+                                <div class="stat-title">Informações</div>
+                                <div class="stat">
+                                    <div class="stat-label">Raça</div>
+                                    <div class="stat-value">{{ personagem["raca"] }}</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-label">Classe</div>
+                                    <div class="stat-value">{{ personagem["classe"] }}</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-label">Pontos de Vida</div>
+                                    <div class="stat-value">{{ personagem["pontos_vida"] }}</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-label">Experiência</div>
+                                    <div class="stat-value">{{ personagem["pontos_experiencia"] }}</div>
+                                </div>
+                            </div>
+                            <div class="stat-section">
+                                <div class="stat-title">Atributos</div>
+                                <div class="stat">
+                                    <div class="stat-label">Força</div>
+                                    <div class="stat-value">{{ personagem["forca"] }}</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-label">Destreza</div>
+                                    <div class="stat-value">{{ personagem["destreza"] }}</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-label">Constituição</div>
+                                    <div class="stat-value">{{ personagem["constituicao"] }}</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-label">Inteligência</div>
+                                    <div class="stat-value">{{ personagem["inteligencia"] }}</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-label">Sabedoria</div>
+                                    <div class="stat-value">{{ personagem["sabedoria"] }}</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-label">Carisma</div>
+                                    <div class="stat-value">{{ personagem["carisma"] }}</div>
+                                </div>
+                            </div>
+                        </div>  
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                
             </div>
         </div>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <footer class="py-5 text-center">
+    <footer class="py-5 text-center footer">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi blandit varius magna et efficitur.</p>
         <p class="mb-0">
           <a href="#">Voltar ao topo</a>
         </p>
-
+        <!-- Adiciona estilo unico quando a navbar estende -->
         <script>
             document.querySelector('.navbar-toggler').addEventListener('click', function () {
             const navbar = document.querySelector('.navbarhome');
@@ -188,7 +160,6 @@
             navbar.setAttribute('aria-expanded', expanded);
             });
         </script>
-
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </footer>
 </body>

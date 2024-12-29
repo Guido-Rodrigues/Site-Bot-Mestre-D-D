@@ -1,0 +1,75 @@
+#container{
+    background-color: #582d30d5;
+    padding: 2px;
+    max-width: 60%;
+    box-sizing: border-box;
+}
+
+#container-inner{
+    padding: 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: auto;
+}
+
+.card-list-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+    margin-top: 50px;
+    color: #F8D5B5;
+}
+
+.personagem{
+    background-color: #582d30;
+    max-width: 400px;
+    padding: 10px;
+    color: wheat;
+    margin: 10px;
+}
+
+.personagem > .nome{
+    padding: 0;
+    margin: 0;
+    font-weight: bold;
+    font-size: 1.5rem;
+    width: 100%;
+}
+.personagem > .campanha {
+    margin-bottom: 10px;
+}
+
+.stat-title{
+    width: 100%;
+    margin: 0;
+    padding: 5px;
+    background-color: #F8D5B5;
+    color: #582d30;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.stat-section{
+    margin-top: 20px;
+}
+
+.stat {
+    width: 100%;
+    border-bottom: 1px solid #f8d6b549;
+    padding-left: 5px;
+    padding-right: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+.empty-personagem-list{
+    margin-top: 50px;
+    width: 100%;text-align: center;
+    color: #F8D5B5; 
+}
