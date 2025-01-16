@@ -461,9 +461,32 @@ def meus_personagens():
     personagens = jogadorService.get_personagens_by_id_jogador(id)
     for personagem in personagens:
         personagem["campanha"] = campanhaService.get_by_id(personagem["campanha_id"])
-    print(personagens)
+    print(personagens) #debug
     return render_template('meus_personagens.html', personagens=personagens, usuario=usuario, fotoperfil=urlfotoperfil)
     
+@app.route('/minhas_aventuras', methods=["GET"])
+def minhas_aventuras():
+    if not 'usuario_logado' in session:
+        return redirect(url_for('login'))
+    
+    id = session['id_logado']
+    usuario = session['usuario_logado'].upper()
+    
+    #Adquire o usuario pelo seu ID e sua foto
+    jogador = jogadorService.get_by_id(id)
+    urlfotoperfil = url_for('static', filename=jogador["caminhofoto"].replace('static/', '')) if jogador else None
+
+    #Adquire os personagens do usuario e os dados de sua campanha
+    personagens = jogadorService.get_personagens_by_id_jogador(id)
+    for personagem in personagens:
+        personagem["campanha"] = campanhaService.get_by_id(personagem["campanha_id"])
+    print(personagens) #debug
+
+    campanhas = campanhaService.get_by_id(personagem("campanha"))
+    print(f"campanhas = {campanhas}")   
+
+    return render_template('minhas_aventuras.html', personagens=personagens, usuario=usuario, fotoperfil=urlfotoperfil)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
