@@ -480,12 +480,12 @@ def minhas_aventuras():
     personagens = jogadorService.get_personagens_by_id_jogador(id)
     for personagem in personagens:
         personagem["campanha"] = campanhaService.get_by_id(personagem["campanha_id"])
-    print(personagens) #debug
 
-    campanhas = campanhaService.get_by_id(personagem("campanha"))
-    print(f"campanhas = {campanhas}")   
+    #Adquire as campanhas do usuario
+    lista_campanhas = campanhaService.get_campanhas(id)
+    
 
-    return render_template('minhas_aventuras.html', personagens=personagens, usuario=usuario, fotoperfil=urlfotoperfil)
+    return render_template('minhas_aventuras.html', personagens=personagens, usuario=usuario, fotoperfil=urlfotoperfil, lista_campanhas = lista_campanhas)
 
 
 if __name__ == '__main__':

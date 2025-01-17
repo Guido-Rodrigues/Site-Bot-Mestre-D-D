@@ -153,6 +153,17 @@ header .navbar {
     /* margin-bottom: 100px; */
 }
 
+#background4 {
+    background-image: url('../img/background12.webp');
+    background-size: cover;
+    background-position: center;
+    /* background-repeat: no-repeat; */
+    height: 100%; /* Garante que a altura da página cubra toda a tela */
+    padding-top: 50px;
+    border-bottom: 4px solid #5c3c3e; /* Borda inferior*/
+    /* margin-bottom: 100px; */
+}
+
 
 /* 
 #background3video {
@@ -555,6 +566,13 @@ footer{
 
 .float-up {
     animation: float-up 0.3s ease-out forwards;
+}
+
+.textbox {
+    max-height: 300px;
+    min-height: 300px;
+    overflow:scroll;
+    overflow-x: hidden;
 }
 
 @keyframes float-up {

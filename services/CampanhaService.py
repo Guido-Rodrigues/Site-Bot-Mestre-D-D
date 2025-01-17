@@ -34,3 +34,20 @@ class CampanhaService:
         cursor.close()
         connection.close()
         return campanha
+    
+    def get_campanhas(self,id_usuario: int):
+        connection = mysql.connector.connect(**self.db_config)
+        cursor = connection.cursor()
+        query = "select c.campanha_id, c.nome, c.sinopse, c.data_inicio, c.`status` from personagens p join campanhas c  on p.campanha_id = c.campanha_id where p.jogador_id = %s"
+        cursor.execute(query, (id_usuario,))
+        campanhas = cursor.fetchall()
+        lista_campanhas=[]
+        for campanha in campanhas:
+            lista_campanhas.append({"campanha_id" : campanha[0],
+                                    "nome" : campanha[1],
+                                    "sinopse" : campanha[2],
+                                    "data_inicio" : campanha[3],
+                                    "status" : campanha[4]
+                                    })
+        print(lista_campanhas)
+        return lista_campanhas
