@@ -81,8 +81,8 @@
             <p id="textobg1">Bem-vindo, {{usuario}}!</p>
             <p id="textobg1desc">Explore novas aventuras ou retorne à sua campanha agora mesmo.</p>
             <div id="buttons">
-                <a href="" class="btn">Iniciar Campanha</a>
-                <a href="" class="btn">Minhas Aventuras</a>
+                <a href="{{ url_for('iniciar_campanha') }}" class="btn">Iniciar Campanha</a>
+                <a href="{{ url_for('minhas_aventuras') }}" class="btn">Minhas Aventuras</a>
             </div>
         </div>
     </div>

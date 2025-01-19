@@ -487,6 +487,21 @@ def minhas_aventuras():
 
     return render_template('minhas_aventuras.html', personagens=personagens, usuario=usuario, fotoperfil=urlfotoperfil, lista_campanhas = lista_campanhas)
 
+@app.route('/iniciar_campanha', methods=['POST','GET'])
+def iniciar_campanha():
+    if not 'usuario_logado' in session:
+        return redirect(url_for('login'))
+
+    id = session['id_logado']
+    usuario = session['usuario_logado'].upper()
+    
+    jogador = jogadorService.get_by_id(id)
+    urlfotoperfil = url_for('static', filename=jogador["caminhofoto"].replace('static/', '')) if jogador else None
+
+    return render_template('iniciar_campanha.html', usuario = usuario, fotoperfil = urlfotoperfil)
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
