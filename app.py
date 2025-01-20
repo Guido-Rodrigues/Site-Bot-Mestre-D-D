@@ -498,9 +498,36 @@ def iniciar_campanha():
     jogador = jogadorService.get_by_id(id)
     urlfotoperfil = url_for('static', filename=jogador["caminhofoto"].replace('static/', '')) if jogador else None
 
-    return render_template('iniciar_campanha.html', usuario = usuario, fotoperfil = urlfotoperfil)
-
-
+    if request.method == 'POST':
+        action = request.form.get('action')
+        if action == 'form2':
+            nomecampanha = request.form.get('nomecampanha')
+            session['nomecampanha'] = nomecampanha
+            campanhaService.criar_campanha(nomecampanha)
+            return(render_template('iniciar_campanha.html',usuario = usuario, fotoperfil = urlfotoperfil, sucesso1 = f"Campanha '{nomecampanha}' foi criada com sucesso!", criarpersonagem=True, nomecampanha = nomecampanha))
+        elif action == 'form1':
+            nomecampanha = session['nomecampanha']
+            jogador_id = session['id_logado']
+            campanha_id     = campanhaService.get_id_by_name(nomecampanha)
+            nome            = request.form.get('nomepersonagem')
+            raca            = request.form.get('racapersonagem')
+            classe          = request.form.get('classepersonagem')
+            pontos_vida     = request.form.get('vidapersonagem')
+            forca           = request.form.get('forcapersonagem')
+            destreza        = request.form.get('destrezapersonagem')
+            constituicao    = request.form.get('constituicaopersonagem')
+            inteligencia    = request.form.get('inteligenciapersonagem')
+            sabedoria       = request.form.get('sabedoriapersonagem')
+            carisma         = request.form.get('carismapersonagem')
+            print(f'Essa é a lista no app FLASK: {jogador_id,campanha_id,nome,raca,classe,pontos_vida,forca,destreza,constituicao,inteligencia,sabedoria,carisma}')
+            jogadorService.criar_personagem(jogador_id,campanha_id,nome,raca,classe,pontos_vida,forca,destreza,constituicao,inteligencia,sabedoria,carisma)
+            session['nomecampanha'] = ''
+            return(render_template('home.html',usuario = usuario, fotoperfil = urlfotoperfil,sucessopersonagem = f"O(A) personagem '{nome}' foi criado(a) com sucesso!"))
+            
+    else:
+        return render_template('iniciar_campanha.html', usuario = usuario, fotoperfil = urlfotoperfil)
+        
+    
 
 
 if __name__ == '__main__':

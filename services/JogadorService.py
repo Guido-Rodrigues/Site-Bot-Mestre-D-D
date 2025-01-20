@@ -82,3 +82,15 @@ class JogadorService:
         cursor.close()
         connection.close()
         return jogador
+    
+    def criar_personagem(self, jogador_id,campanha_id,nome,raca,classe,pontos_vida,forca,destreza,constituicao,inteligencia,sabedoria,carisma):
+        connection = mysql.connector.connect(**self.db_config)
+        cursor = connection.cursor()
+        params_lista=(jogador_id,campanha_id,nome,raca,classe,pontos_vida,forca,destreza,constituicao,inteligencia,sabedoria,carisma)
+        query = "INSERT INTO personagens (jogador_id,campanha_id,nome,raca,classe,pontos_vida,forca,destreza,constituicao,inteligencia,sabedoria,carisma) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);"
+        cursor.executemany(query,(params_lista,))
+        print(f'Essa é a lista no servico: {jogador_id,campanha_id,nome,raca,classe,pontos_vida,forca,destreza,constituicao,inteligencia,sabedoria,carisma}')
+
+        connection.commit()
+        cursor.close()
+        connection.close()

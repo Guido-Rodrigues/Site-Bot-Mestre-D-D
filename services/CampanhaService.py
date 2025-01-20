@@ -50,4 +50,29 @@ class CampanhaService:
                                     "status" : campanha[4]
                                     })
         print(lista_campanhas)
+        cursor.close()
+        connection.close()
         return lista_campanhas
+    
+    def criar_campanha(self,nome):
+        connection = mysql.connector.connect(**self.db_config)
+        cursor = connection.cursor()
+        query = "INSERT INTO campanhas (nome,data_inicio) VALUES (%s,NOW());"
+        cursor.execute(query,(nome,))
+        connection.commit()
+        cursor.close()
+        connection.close()
+    
+    def get_id_by_name(self,nome):
+        connection = mysql.connector.connect(**self.db_config)
+        cursor = connection.cursor(buffered=True)
+        query = "SELECT campanha_id FROM campanhas WHERE nome = %s"
+        print(f'O NOME PASSADO PARA A FUNCAO FOI {nome}')
+        cursor.execute(query,(nome,))
+        id = cursor.fetchone()[0]
+        print(type(id))
+        cursor.close()
+        connection.close(),
+        print(f'O ID RETORNADO dA FUNCAO FOI {id}')
+
+        return id

@@ -9,7 +9,24 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/meus_personagens.css')}}">
 </head>
 <body>
-    <div id="background2" class="" style="padding-bottom:20rem ;">
+
+
+  <!-- captura a variavel 'criarpersonagem' declarada no app.py em caso de criarpersonagem -->
+  {% if criarpersonagem %}
+  <div id="backgroundblur" class="elementoFechavel">
+  </div>
+  {% endif %} 
+
+
+
+                      <!-- captura a variavel 'sucesso1' declarada no app.py em caso de sucesso1 -->
+                      {% if sucesso1 %}
+                      <div id="sucesso1" class="sucesso1" role="alert">
+                      {{ sucesso1 }}
+                      </div>
+                      {% endif %}                                       
+  
+    <div id="background2" class="" style="padding-bottom:20rem ;background-image: url('../img/background13.jpeg');">
 
         <header>
             <nav class="navbar navbar-expand-lg bg-body-tertiary navbarhome">
@@ -75,77 +92,179 @@
               </nav>
         </header>
 
+                              <!-- captura a variavel 'criarpersonagem' declarada no app.py em caso de criarpersonagem -->
+                              {% if criarpersonagem %}
+                              <div class="center elementoFechavel">
+                                <div class="card cardform mb-4 container-fluid configcard center criarpersonagem">
+                                  <div style="display: flex;">
+                                    <button id="hideButton" class="btn btn-primary" style="width: auto; height: auto; margin-left: 95%;">❌</button>                                   
+                                  </div>
+                                  <p id="textoconfigbox1" class="text-center">Agora é hora de criar seu personagem!</p>
+                                  <p id="textoconfigbox1desc" class="text-center">Com sua campanha pronta para uso, reserve um momento determinar as estatisticas iniciais do seu personagem! <br>Clique no botão "Avançar👉" para continuar.</p>
+                                    <!-- Form Inserir nome da nova campanha -->
+                                  <form action="{{ url_for('iniciar_campanha') }}" method="POST" class="configform" style="padding-bottom: 40px; padding-top:40px ;">
+                                      <div id="carouselExample" class="carousel slide"> 
+                                          <div class="carousel-inner"> 
+                                            <div class="carousel-item active"> 
+                                              <div class="container">
+                                                  <div class="mb-3">
+                                                      <label for="nomepersonagem" class="form-label">Insira o nome para seu novo personagem:</label>
+                                                      <input type="text" class="form-control" id="nomepersonagem" name="nomepersonagem" required placeholder="Insira o nome aqui">
+                                                  </div>
+                                                  <div class="carouselbuttons" style="display: flex;">
+                                                      <button type="button" disabled class="btn btn-primary" data-bs-target="#carouselExample" data-bs-slide="prev" style="background-color: gray; border-color: gray;">👈Voltar</button>
+                                                      <button type="button" class="btn btn-primary" data-bs-target="#carouselExample" data-bs-slide="next">Avançar👉</button>
+                                                  </div> 
+                                              </div>
+                                            </div> 
+
+                                            <div class="carousel-item">
+                                              <div class="container">
+                                                  <div class="mb-3">
+                                                      <label for="racapersonagem" class="form-label">Insira a raça para seu novo personagem:</label>
+                                                      <input type="text" class="form-control" id="racapersonagem" name="racapersonagem" required placeholder="Insira a raça aqui">
+                                                  </div>
+                                                  <div class="carouselbuttons" style="display: flex;">
+                                                      <button type="button" class="btn btn-primary" data-bs-target="#carouselExample" data-bs-slide="prev">👈Voltar</button>
+                                                      <button type="button" class="btn btn-primary" data-bs-target="#carouselExample" data-bs-slide="next">Avançar👉</button>
+                                                  </div>
+                                              </div>
+
+                                            </div> 
+                                            <div class="carousel-item">
+                                              <div class="container">
+                                                  <div class="mb-3">
+                                                      <label for="classepersonagem" class="form-label">Insira a classe para seu novo personagem:</label>
+                                                      <input type="text" class="form-control" id="classepersonagem" name="classepersonagem" required placeholder="Insira a classe">
+                                                  </div>
+                                                  <div class="carouselbuttons" style="display: flex;">
+                                                      <button type="button" class="btn btn-primary" data-bs-target="#carouselExample" data-bs-slide="prev">👈Voltar</button>
+                                                      <button type="button" class="btn btn-primary" data-bs-target="#carouselExample" data-bs-slide="next">Avançar👉</button>
+                                                  </div>
+                                              </div>
+                                            </div> 
+
+                                            <div class="carousel-item">
+                                              <div class="container">
+                                                  <div class="mb-3">
+                                                      <label for="vidapersonagem" class="form-label">Insira os pontos de vida para seu novo personagem:</label>
+                                                      <input type="number" class="form-control" id="vidapersonagem" name="vidapersonagem" required placeholder="Insira o valor">
+                                                  </div>
+                                                  <div class="carouselbuttons" style="display: flex;">
+                                                      <button type="button" class="btn btn-primary" data-bs-target="#carouselExample" data-bs-slide="prev">👈Voltar</button>
+                                                      <button type="button" class="btn btn-primary" data-bs-target="#carouselExample" data-bs-slide="next">Avançar👉</button>
+                                                  </div>
+                                              </div>
+                                            </div>         
+                                            
+                                            <div class="carousel-item">
+                                              <div class="container">
+                                                  <div class="mb-3">
+                                                      <label for="forcapersonagem" class="form-label">Insira a força para seu novo personagem:</label>
+                                                      <input type="number" class="form-control" id="forcapersonagem" name="forcapersonagem" required placeholder="Insira o valor">
+                                                  </div>
+                                                  <div class="carouselbuttons" style="display: flex;">
+                                                      <button type="button" class="btn btn-primary" data-bs-target="#carouselExample" data-bs-slide="prev">👈Voltar</button>
+                                                      <button type="button" class="btn btn-primary" data-bs-target="#carouselExample" data-bs-slide="next">Avançar👉</button>
+                                                  </div>
+                                              </div>
+                                            </div>
+
+                                            <div class="carousel-item">
+                                              <div class="container">
+                                                  <div class="mb-3">
+                                                      <label for="destrezapersonagem" class="form-label">Insira a destreza para seu novo personagem:</label>
+                                                      <input type="number" class="form-control" id="destrezapersonagem" name="destrezapersonagem" required placeholder="Insira o valor">
+                                                  </div>
+                                                  <div class="carouselbuttons" style="display: flex;">
+                                                      <button type="button" class="btn btn-primary" data-bs-target="#carouselExample" data-bs-slide="prev">👈Voltar</button>
+                                                      <button type="button" class="btn btn-primary" data-bs-target="#carouselExample" data-bs-slide="next">Avançar👉</button>
+                                                  </div>
+                                              </div>
+                                            </div>
+
+                                            <div class="carousel-item">
+                                              <div class="container">
+                                                  <div class="mb-3">
+                                                      <label for="constituicaopersonagem" class="form-label">Insira a constituição para seu novo personagem:</label>
+                                                      <input type="number" class="form-control" id="constituicaopersonagem" name="constituicaopersonagem" required placeholder="Insira o valor">
+                                                  </div>
+                                                  <div class="carouselbuttons" style="display: flex;">
+                                                      <button type="button" class="btn btn-primary" data-bs-target="#carouselExample" data-bs-slide="prev">👈Voltar</button>
+                                                      <button type="button" class="btn btn-primary" data-bs-target="#carouselExample" data-bs-slide="next">Avançar👉</button>
+                                                  </div>
+                                              </div>
+                                            </div>
+
+                                            <div class="carousel-item">
+                                              <div class="container">
+                                                  <div class="mb-3">
+                                                      <label for="inteligenciapersonagem" class="form-label">Insira a inteligencia para seu novo personagem:</label>
+                                                      <input type="number" class="form-control" id="inteligenciapersonagem" name="inteligenciapersonagem" required placeholder="Insira o valor">
+                                                  </div>
+                                                  <div class="carouselbuttons" style="display: flex;">
+                                                      <button type="button" class="btn btn-primary" data-bs-target="#carouselExample" data-bs-slide="prev">👈Voltar</button>
+                                                      <button type="button" class="btn btn-primary" data-bs-target="#carouselExample" data-bs-slide="next">Avançar👉</button>
+                                                  </div>
+                                              </div>
+                                            </div>
+
+                                            <div class="carousel-item">
+                                              <div class="container">
+                                                  <div class="mb-3">
+                                                      <label for="sabedoriapersonagem" class="form-label">Insira a sabedoria para seu novo personagem:</label>
+                                                      <input type="number" class="form-control" id="sabedoriapersonagem" name="sabedoriapersonagem" required placeholder="Insira o valor">
+                                                  </div>
+                                                  <div class="carouselbuttons" style="display: flex;">
+                                                      <button type="button" class="btn btn-primary" data-bs-target="#carouselExample" data-bs-slide="prev">👈Voltar</button>
+                                                      <button type="button" class="btn btn-primary" data-bs-target="#carouselExample" data-bs-slide="next">Avançar👉</button>
+                                                  </div>
+                                              </div>
+                                            </div>
+
+                                            <div class="carousel-item">
+                                              <div class="container">
+                                                  <div class="mb-3">
+                                                      <label for="carismapersonagem" class="form-label">Insira o carisma para seu novo personagem:</label>
+                                                      <input type="number" class="form-control" id="carismapersonagem" name="carismapersonagem" required placeholder="Insira o valor">
+                                                  </div>
+                                                  <div class="carouselbuttons" style="display: flex;">
+                                                      <button type="button" class="btn btn-primary" data-bs-target="#carouselExample" data-bs-slide="prev">👈Voltar</button>
+                                                      <button type="submit" name="action" value="form1" class="btn btn-primary">Enviar✅</button>
+                                                  </div>
+                                              </div>
+                                            </div>
+
+                                          </div> 
+                                        </div> 
+                                  </form>
+                                </div>
+                              </div>
+
+        
+                              {% endif %} 
+
+
         <div id="configbox1" class="center textobg1boxhome">
             <div id="container-inner">
                 <p id="textoconfigbox1">Criação de campanha</p>
                 <p id="textoconfigbox1desc">Embarque em uma nova jornada</p>
-
                 <div class="card cardform mb-4 container-fluid configcard center">
                     <!-- Form Inserir nome da nova campanha -->
-                    <form action="{{ url_for('alterar_nome') }}" method="POST" class="configform" style="padding-bottom: 40px;">
-                        <div id="carouselExample" class="carousel slide">
-                            <div class="carousel-inner">
-
-                              <div class="carousel-item active">
+                    <form action="{{ url_for('iniciar_campanha') }}" method="POST" class="configform" style="padding-bottom: 40px;">
                                 <div class="container">
                                     <div class="mb-3">
-                                        <label for="usuario" class="form-label">Insira o nome para sua nova campanha:</label>
-                                        <input type="text" class="form-control" id="usuario" name="usuario" required placeholder="Insira o nome aqui">
+                                        <label for="nomecampanha" class="form-label">Insira o nome para sua nova campanha:</label>
+                                        <input type="text" class="form-control" id="nomecampanha" name="nomecampanha" required placeholder="Insira o nome aqui">
                                     </div>
-                                    <div class="carouselbuttons" style="display: flex;">
-                                        <button type="button" disabled class="btn btn-primary" data-bs-target="#carouselExample" data-bs-slide="prev" style="background-color: gray; border-color: gray;">👈Voltar</button>
-                                        <button type="button" class="btn btn-primary" data-bs-target="#carouselExample" data-bs-slide="next">Avançar👉</button>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">🌟Criar</button>
+
+                                    <button type="submit" name="action" value="form2" class="btn btn-primary">🌟Criar</button>
                                 </div>
-                              </div>
-
-                              <div class="carousel-item">
-                                <div class="container">
-                                    <div class="mb-3">
-                                        <label for="usuario" class="form-label">Insira o nome para sua nova campanha:</label>
-                                        <input type="text" class="form-control" id="usuario" name="usuario" required placeholder="Digite seu novo nome">
-                                    </div>
-                                    <div class="carouselbuttons" style="display: flex;">
-                                        <button type="button" class="btn btn-primary" data-bs-target="#carouselExample" data-bs-slide="prev">👈Voltar</button>
-                                        <button type="button" class="btn btn-primary" data-bs-target="#carouselExample" data-bs-slide="next">Avançar👉</button>
-                                    </div>
-                                </div>
-
-                              </div>
-
-                              <div class="carousel-item">
-                                <div class="container">
-                                    <div class="mb-3">
-                                        <label for="usuario" class="form-label">Insira o nome para sua nova campanha:</label>
-                                        <input type="text" class="form-control" id="usuario" name="usuario" required placeholder="Digite seu novo nome">
-                                    </div>
-                                    <div class="carouselbuttons" style="display: flex;">
-                                        <button type="button" class="btn btn-primary" data-bs-target="#carouselExample" data-bs-slide="prev">👈Voltar</button>
-                                        <button type="button" disabled class="btn btn-primary" data-bs-target="#carouselExample" data-bs-slide="next" style="background-color: gray; border-color: gray;">Avançar👉</button>
-                                    </div>
-                                </div>
-                              </div>
-
-                            </div>
-                          </div>
-
-
                     </form>
-
-
-
-
-
-                </div>
-
-
-                
-
-
+                </div>             
           </div>
-            </div>
         </div>
+      </div>
     </div>
         
     <footer class="py-5 text-center footer">
@@ -161,6 +280,18 @@
             navbar.setAttribute('aria-expanded', expanded);
             });
         </script>
+          <!-- Script botão fechar -->
+          <script>
+            document.getElementById("hideButton").addEventListener("click", function () {
+                document.querySelectorAll(".elementoFechavel").forEach(element => {
+                    element.classList.toggle("hidden");
+                });
+            });
+
+          </script>
+
+
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </footer>
 </body>
