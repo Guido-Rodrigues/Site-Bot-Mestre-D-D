@@ -122,7 +122,16 @@
                                               <div class="container">
                                                   <div class="mb-3">
                                                       <label for="racapersonagem" class="form-label">Insira a raça para seu novo personagem:</label>
-                                                      <input type="text" class="form-control" id="racapersonagem" name="racapersonagem" required placeholder="Insira a raça aqui">
+                                                      <!-- <input type="text" class="form-control" id="racapersonagem" name="racapersonagem" required placeholder="Insira a raça aqui"> -->
+                                                      <select name="racapersonagem" class="form-control" id="racapersonagem" name="racapersonagem" required>
+                                                        <option value="Humano">Humano</option>
+                                                        <option value="Elfo">Elfo</option>
+                                                        <option value="Anão">Anão</option>
+                                                        <option value="Halfling">Halfling</option>
+                                                        <option value="Meio-Orc">Meio-Orc</option>
+                                                        <option value="Meio-Elfo">Meio-Elfo</option>
+                                                        <option value="Gnomo">Gnomo</option>
+                                                    </select>
                                                   </div>
                                                   <div class="carouselbuttons" style="display: flex;">
                                                       <button type="button" class="btn btn-primary" data-bs-target="#carouselExample" data-bs-slide="prev">👈Voltar</button>
