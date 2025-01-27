@@ -1,0 +1,31 @@
+Characteristicas:
+
+Nome$
+Idade$
+Peso$
+Altura$ 
+Sexo $ DROPDOWN
+Raça $ DROPDOWN
+Classe $ DROPDOWN
+Nivel
+
+Atributos: Gerados aleatoriamente ou manualmente
+
+Força
+Destreza
+Constituição
+Inteligencia
+Sabedoria
+Carisma
+
+
+
+Bonus de atributos de raça:
+
+            "Humano": {"bonus_feat": True, "extra_skill_points": 1},
+            "Elfo": {"Destreza": 2, "Constituição": -2},
+            "Anão": {"Constituição": 2, "Carisma": -2},
+            "Halfling": {"Destreza": 2, "Força": -2},
+            "Meio-Orc": {"Força": 2, "Inteligência": -2, "Carisma": -2},
+            "Meio-Elfo": {},  # Nenhum bônus racial específico
+            "Gnomo": {"Constituição": 2, "Força": -2}
