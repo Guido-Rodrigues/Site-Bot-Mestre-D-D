@@ -83,14 +83,38 @@ class JogadorService:
         connection.close()
         return jogador
     
-    def criar_personagem(self, jogador_id,campanha_id,nome,raca,classe,pontos_vida,forca,destreza,constituicao,inteligencia,sabedoria,carisma):
-        connection = mysql.connector.connect(**self.db_config)
-        cursor = connection.cursor()
-        params_lista=(jogador_id,campanha_id,nome,raca,classe,pontos_vida,forca,destreza,constituicao,inteligencia,sabedoria,carisma)
-        query = "INSERT INTO personagens (jogador_id,campanha_id,nome,raca,classe,pontos_vida,forca,destreza,constituicao,inteligencia,sabedoria,carisma) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);"
-        cursor.executemany(query,(params_lista,))
-        print(f'Essa é a lista no servico: {jogador_id,campanha_id,nome,raca,classe,pontos_vida,forca,destreza,constituicao,inteligencia,sabedoria,carisma}')
 
-        connection.commit()
-        cursor.close()
-        connection.close()
+    class_hit_dice = {
+        "Barbaro": 12,
+        "Bardo": 6,
+        "Clérigo": 8,
+        "Druida": 8,
+        "Guerreiro": 10,
+        "Monge": 8,
+        "Paladino": 10,
+        "Ranger": 10,
+        "Ladino": 6,
+        "Feiticeiro": 4,
+        "Mago": 4
+    }
+
+
+
+
+
+
+    def criar_personagem(self, jogador_id,campanha_id,nome,raca,classe,pontos_vida,forca,destreza,constituicao,inteligencia,sabedoria,carisma):
+            connection = mysql.connector.connect(**self.db_config)
+            cursor = connection.cursor()
+
+            #Calcula ponto de vida do personagem
+            # pontos_vida = class_hit_dice {classe} * 1 
+
+            params_lista=(jogador_id,campanha_id,nome,raca,classe,pontos_vida,forca,destreza,constituicao,inteligencia,sabedoria,carisma)
+            query = "INSERT INTO personagens (jogador_id,campanha_id,nome,raca,classe,pontos_vida,forca,destreza,constituicao,inteligencia,sabedoria,carisma) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);"
+            cursor.executemany(query,(params_lista,))
+            print(f'Essa é a lista no servico: {jogador_id,campanha_id,nome,raca,classe,pontos_vida,forca,destreza,constituicao,inteligencia,sabedoria,carisma}')
+
+            connection.commit()
+            cursor.close()
+            connection.close()
