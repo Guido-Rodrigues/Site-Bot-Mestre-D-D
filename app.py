@@ -455,8 +455,10 @@ def meus_personagens():
     id = session['id_logado']
     usuario = session['usuario_logado'].upper()
     
+    urlfotoperfil = None
     jogador = jogadorService.get_by_id(id)
-    urlfotoperfil = url_for('static', filename=jogador["caminhofoto"].replace('static/', '')) if jogador else None
+    if jogador["caminhofoto"] is not None:
+        urlfotoperfil = url_for('static', filename=jogador["caminhofoto"].replace('static/', '')) if jogador else None
 
     personagens = jogadorService.get_personagens_by_id_jogador(id)
     for personagem in personagens:
@@ -473,8 +475,10 @@ def minhas_aventuras():
     usuario = session['usuario_logado'].upper()
     
     #Adquire o usuario pelo seu ID e sua foto
+    urlfotoperfil = None
     jogador = jogadorService.get_by_id(id)
-    urlfotoperfil = url_for('static', filename=jogador["caminhofoto"].replace('static/', '')) if jogador else None
+    if jogador["caminhofoto"] is not None:
+        urlfotoperfil = url_for('static', filename=jogador["caminhofoto"].replace('static/', '')) if jogador else None
 
     #Adquire os personagens do usuario e os dados de sua campanha
     personagens = jogadorService.get_personagens_by_id_jogador(id)
@@ -495,8 +499,10 @@ def iniciar_campanha():
     id = session['id_logado']
     usuario = session['usuario_logado'].upper()
     
+    urlfotoperfil = None
     jogador = jogadorService.get_by_id(id)
-    urlfotoperfil = url_for('static', filename=jogador["caminhofoto"].replace('static/', '')) if jogador else None
+    if jogador['caminhofoto'] is not None:
+        urlfotoperfil = url_for('static', filename=jogador["caminhofoto"].replace('static/', '')) if jogador else None
 
     if request.method == 'POST':
         action = request.form.get('action')
