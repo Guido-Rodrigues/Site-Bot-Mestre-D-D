@@ -79,13 +79,6 @@ class JogadorService:
                 "caminhofoto"   : result[5],        
             }
 
-        query = "SELECT caminhofoto FROM jogadores WHERE jogador_id = %s"
-        cursor.execute(query, tuple([id_jogador]))
-
-        # result = cursor.fetchone()
-        # if result and result[0]:
-        #     jogador["caminhofoto"] = result[0]
-
         cursor.close()
         connection.close()
         return jogador
